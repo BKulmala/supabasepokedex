@@ -1,0 +1,86 @@
+:root {
+  --grass: green;
+  --bug: lime;
+  --dark: black;
+  --dragon: lavender;
+  --electric: yellow;
+  --fairy: pink;
+  --fighting: brown;
+  --fire: red;
+  --flying: aqua;
+  --ghost: purple;
+  --ground: beige;
+  --ice: teal;
+  --water: blue;
+  --normal: gray;
+  --poison:blueviolet;
+  --psychic:fuchsia;
+  --rock:chocolate;
+  --steel:silver;
+}
+
+html,
+body {
+  margin: 0;
+  max-width: 100vw;
+  background-color: rgb(57, 199, 224);
+  overflow-x:hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mainPage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  z-index: inherit;
+
+}
+
+.pokemonChoice {
+  position:relative;
+  z-index: 3;
+  width:400px;
+  top:-20px;
+  left:-40px;
+}
+
+.pokemonGIF {
+  z-index: 2;
+}
+
+.GIFBackground {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  height: 170%;
+  width: 100%;
+  animation: loop infinite 1s linear;
+}
+
+.filler {
+  background-color:rgb(57, 199, 224);
+  border:solid rgb(31, 143, 196);
+  border-radius:30px;
+  width: 400px;
+  display: flex;
+  font-size:20px;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+@keyframes loop {
+0% {
+  transform: translate(0%,0%);
+}
+100% {
+  transform: translate(5%,4%);
+}
+}
+.displayGIF {
+  position: fixed;
+  z-index:10;
+  top: 25%;
+  left: 45%;
+}

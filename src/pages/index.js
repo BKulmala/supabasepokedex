@@ -4,6 +4,9 @@ import { Girassol, Inter } from 'next/font/google'
 import pokemonBackground from '../../public/grid.png'
 import React, {useState, useEffect } from 'react'
 import { supabase } from '../api/hello.js'
+import TextField from "@mui/material/TextField"
+import FormGroup from "@mui/material/FormGroup"
+import { Checkbox, FormControlLabel } from '@mui/material'
 const inter = Inter({ subsets: ['latin'] })
 
 function changeGIF(pokemon) {
@@ -14,6 +17,8 @@ function changeGIF(pokemon) {
 
 
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
+  const [value, setValue] = React.useState();
+  const [array, setArray] = useState([]);
   return (
     <>
       <Head>
@@ -23,8 +28,32 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
         <link rel="icon" href="https://img.pokemondb.net/sprites/x-y/normal/bulbasaur.png"/>
       </Head>
       <main class="mainPage">
-        <div class="pokemonChoice">        
+        <div class="pokemonChoice">  
+        <TextField
+          id="outlined-basic"
+          variant="filled"
+          fullWidth
+          label={/*user.email.slice(0,-10)*/"string"}
+          onChange={(e) => setValue(e.target.value)}
+          sx={{ 
+            ml:6,
+            mt:4
+          }}
+        />      
         <ul>
+        <FormGroup>
+        <FormControlLabel labelPlacement="end" 
+                    control={<Checkbox sx={{left:45}}{..."label"}
+                    onClick={e => {           
+                      let copy = array;
+                      console.log(copy);
+                      if(e.target.checked == true) {
+                      }
+                      if(e.target.checked == false) {
+                        setArray([]);
+                    }}}/>}
+                    label={<span style={{ position: 'relative', right:'-40px' }}>Toggle caught pokemon</span>} />
+        </FormGroup>
       {Kanto.map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>

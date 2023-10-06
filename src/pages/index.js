@@ -39,7 +39,7 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
             ml:6,
             mt:4
           }}
-        />      
+        />
         <ul>
         <FormGroup>
         <FormControlLabel labelPlacement="end" 
@@ -54,55 +54,55 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
                     }}}/>}
                     label={<span style={{ position: 'relative', right:'-40px' }}>Toggle caught pokemon</span>} />
         </FormGroup>
-      {Kanto.map((pokemon) => (
+      {Kanto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>
           {pokemon.name}
           </li>
       ))}
-      {Johto.map((pokemon) => (
+      {Johto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")", }} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />
           {pokemon.Pokemon}
           </li>
       ))}
-      {Hoenn.map((pokemon) => (
+      {Hoenn.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")", }} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />
           {pokemon.Pokemon}
           </li>
       ))}
-      {Sinnoh.map((pokemon) => (
+      {Sinnoh.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")"}} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />
           {pokemon.Pokemon}
           </li>
       ))}
-      {Unova.map((pokemon) => (
+      {Unova.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")", }} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />
           {pokemon.Pokemon}
           </li>
       ))}
-      {Kalos.map((pokemon) => (
+      {Kalos.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")", }} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />
           {pokemon.Pokemon}
           </li>
       ))}
-      {Alola.map((pokemon) => (
+      {Alola.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")", }} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/sun-moon/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />
           {pokemon.Pokemon}
           </li>
       ))}
-      {Galar.map((pokemon) => (
+      {Galar.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type+")", }} class="filler" onClick={() => changeGIF(pokemon.Pokemon)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/sword-shield/normal/' + pokemon.Pokemon + '.png'} alt='Bulbasaur'/>
           <br /><br />

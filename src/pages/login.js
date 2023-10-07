@@ -1,18 +1,31 @@
-import { useRouter } from "next/router";
+import { useEffect } from 'react';
 
-function Home() {
-  const signIn = async () => {
-  };
+function mainPage() {
   return (
-    <div className="text-center flex flex-col gap-4 items-center">
-      <div>Please sign in to continue</div>
-      <button onClick={signIn}>
-        <div className="bg-blue-600 text-white rounded-md p-2 w-48">
-          Sign In
-        </div>
-      </button>
-    </div>
-  );
-}
+  <>
+<div id="info">Hoi!</div>
+<a id="login" href="https://atsjxnlexphneggbwgbb.supabase.co/auth/v1/callback">Identify Yourself</a>
+	{useEffect (() => {window.onload = () => {
+		const fragment = new URLSearchParams(window.location.hash.slice(1));
+		const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 
-export default Home;
+		if (!accessToken) {
+			return (document.getElementById('login').style.display = 'block');
+		}
+
+		fetch('https://discord.com/api/users/@me', {
+			headers: {
+				authorization: `${tokenType} ${accessToken}`,
+			},
+		})
+			.then(result => result.json())
+			.then(response => {
+				const { username, discriminator } = response;
+				document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+			})
+			.catch(console.error);
+	}})}
+</>
+)
+}
+export default mainPage

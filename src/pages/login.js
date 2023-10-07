@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 function mainPage() {
   return (
   <>
-<div id="info">Hoi!</div>
 <a id="login" href="https://atsjxnlexphneggbwgbb.supabase.co/auth/v1/callback">Identify Yourself</a>
 	{useEffect (() => {window.onload = () => {
 		const fragment = new URLSearchParams(window.location.hash.slice(1));

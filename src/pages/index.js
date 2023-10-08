@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField"
 import FormGroup from "@mui/material/FormGroup"
 import { Checkbox, FormControlLabel } from '@mui/material'
 const inter = Inter({ subsets: ['latin'] })
+const { data: { user } } = await supabase.auth.getUser()
 
 function changeGIF(pokemon) {
   var img = document.getElementById("test");
@@ -17,7 +18,7 @@ function changeGIF(pokemon) {
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
-  
+  console.log(user?.email);
   return (
     <>
       <Head>
@@ -45,7 +46,6 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
                     control={<Checkbox sx={{left:45}}{..."label"}
                     onClick={e => {           
                       let copy = array;
-                      console.log(copy);
                       if(e.target.checked == true) {
                       }
                       if(e.target.checked == false) {

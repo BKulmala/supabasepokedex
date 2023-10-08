@@ -4,7 +4,6 @@ async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
   })
-  console.log(data);
 }
 
 function mainPage() {

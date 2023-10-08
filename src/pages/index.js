@@ -17,6 +17,7 @@ function changeGIF(pokemon) {
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
+  
   return (
     <>
       <Head>

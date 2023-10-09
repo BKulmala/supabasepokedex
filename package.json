@@ -9,8 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@supabase/supabase-js": "^2.36.0",
     "next": "13.5.3",
+=======
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@material/textfield": "^14.0.0",
+    "@mui/material": "^5.14.12",
+    "@supabase/auth-ui-react": "^0.4.5",
+    "@supabase/auth-ui-shared": "^0.1.7",
+    "@supabase/supabase-js": "^2.38.0",
+    "express": "^4.18.2",
+    "next": "^13.5.4",
+>>>>>>> 0bbbce7780afbc90935886044d4bd9ec93134f84
     "react": "18.2.0",
     "react-dom": "18.2.0"
   }

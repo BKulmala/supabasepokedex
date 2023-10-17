@@ -29,6 +29,8 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
   const [user, setUser] = useState("");
+
+  var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
   useEffect(() => {
     session().then((e) => {setUser(e)})
   })
@@ -75,6 +77,16 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
       {Kanto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>
+          <Checkbox {...Kanto} color="default" onChange={e => {
+          if(e.target.checked == true) {
+            caughtPokemon.Kanto[pokemon.name] = pokemon.type;
+            console.log(caughtPokemon);
+          }
+          if(e.target.checked == false) {
+            delete caughtPokemon.Kanto[pokemon.name];
+            console.log(caughtPokemon);
+          }
+        }}/>
           {pokemon.name}
           </li>
       ))}

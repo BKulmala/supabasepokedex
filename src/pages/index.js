@@ -25,7 +25,7 @@ async function session() {
   var userEmail = data?.session?.user?.email;
   return userEmail;
 }
-function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar, User}) {
+function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
   const [user, setUser] = useState("");
@@ -139,8 +139,6 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar, User}) 
 }
 
 export async function getServerSideProps() {
-  const { data, error } = await supabase.auth.getSession()
-  var userEmail = data?.session?.user?.email;
   var dataKanto;
   {let { data } = await supabase.from('Kanto').select()
   dataKanto = data;}
@@ -174,8 +172,7 @@ export async function getServerSideProps() {
      Unova: dataUnova,
      Kalos: dataKalos,
      Alola: dataAlola,
-     Galar: dataGalar,
-     User: userEmail || null
+     Galar: dataGalar
     },
   }
 }

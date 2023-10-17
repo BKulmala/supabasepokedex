@@ -6,7 +6,7 @@ import React, {useState, useEffect } from 'react'
 import { supabase } from '../api/hello.js'
 import TextField from "@mui/material/TextField"
 import FormGroup from "@mui/material/FormGroup"
-import { Checkbox, FormControlLabel } from '@mui/material'
+import { Checkbox, FormControlLabel, Button } from '@mui/material'
 const inter = Inter({ subsets: ['latin'] })
 const { data: { user } } = await supabase.auth.getUser()
 
@@ -28,6 +28,11 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
         <link rel="icon" href="https://img.pokemondb.net/sprites/x-y/normal/bulbasaur.png"/>
       </Head>
       <main class="mainPage">
+        <div class="logoutButton">
+          <Button size="small" variant="contained" onClick={() => {
+                alert('clicked');
+          }}>Log out</Button>
+        </div>
         <div class="pokemonChoice">  
         <TextField
           id="outlined-basic"

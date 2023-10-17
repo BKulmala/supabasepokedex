@@ -33,10 +33,8 @@ a {
 }
 
 .mainPage {
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
   z-index: inherit;
-
 }
 
 .pokemonChoice {
@@ -85,4 +83,9 @@ a {
   z-index:10;
   top: 25%;
   left: 45%;
+}
+.logoutButton {
+  position: fixed;
+  right: 0;
+  z-index: 5;
 }

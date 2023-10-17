@@ -7,6 +7,7 @@ import { supabase } from '../api/hello.js'
 import TextField from "@mui/material/TextField"
 import FormGroup from "@mui/material/FormGroup"
 import { Checkbox, FormControlLabel, Button } from '@mui/material'
+import { useRouter } from 'next/navigation';
 const inter = Inter({ subsets: ['latin'] })
 const { data: { user } } = await supabase.auth.getUser()
 
@@ -15,10 +16,14 @@ function changeGIF(pokemon) {
   img.src = "https://projectpokemon.org/images/normal-sprite/" + pokemon + ".gif";
 }
 
+async function signOut(router) {
+const { error } = await supabase.auth.signOut();
+router.push("/login");
+}
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
+  const router = useRouter();
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
-  console.log(user?.email);
   return (
     <>
       <Head>
@@ -30,7 +35,7 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
       <main class="mainPage">
         <div class="logoutButton">
           <Button size="small" variant="contained" onClick={() => {
-                alert('clicked');
+                signOut(router);
           }}>Log out</Button>
         </div>
         <div class="pokemonChoice">  

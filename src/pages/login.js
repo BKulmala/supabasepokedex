@@ -1,5 +1,6 @@
 import { supabase } from '/src/api/hello.js'
 
+import {Button} from '@mui/material'
 async function signInWithDiscord() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
@@ -8,7 +9,9 @@ async function signInWithDiscord() {
 
 function mainPage() {
   return(<>
-  <button onClick={signInWithDiscord()}>Click me!</button>
+          <Button size="small" variant="contained" onClick={() => {
+                signInWithDiscord()
+          }}>Login</Button>
   </>)
 }
 export default mainPage

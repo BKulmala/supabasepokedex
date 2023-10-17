@@ -9,7 +9,7 @@ import FormGroup from "@mui/material/FormGroup"
 import { Checkbox, FormControlLabel, Button } from '@mui/material'
 import { useRouter } from 'next/navigation';
 const inter = Inter({ subsets: ['latin'] })
-const { data: { user } } = await supabase.auth.getUser()
+const { data: { user } } = await supabase.auth.getUser();
 
 function changeGIF(pokemon) {
   var img = document.getElementById("test");
@@ -20,8 +20,10 @@ async function signOut(router) {
 const { error } = await supabase.auth.signOut();
 router.push("/login");
 }
+
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
   const router = useRouter();
+  console.log(user?.email);
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
   return (
@@ -36,7 +38,7 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
         <div class="logoutButton">
           <Button size="small" variant="contained" onClick={() => {
                 signOut(router);
-          }}>Log out</Button>
+          }}>{user?.email}</Button>
         </div>
         <div class="pokemonChoice">  
         <TextField

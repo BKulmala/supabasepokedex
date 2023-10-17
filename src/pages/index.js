@@ -9,7 +9,6 @@ import FormGroup from "@mui/material/FormGroup"
 import { Checkbox, FormControlLabel, Button } from '@mui/material'
 import { useRouter } from 'next/navigation';
 const inter = Inter({ subsets: ['latin'] })
-const { data: { user } } = await supabase.auth.getUser();
 
 function changeGIF(pokemon) {
   var img = document.getElementById("test");
@@ -21,11 +20,19 @@ const { error } = await supabase.auth.signOut();
 router.push("/login");
 }
 
-function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
-  const router = useRouter();
-  console.log(user?.email);
+async function session() {
+  const { data, error } = await supabase.auth.getSession()
+  var userEmail = data?.session?.user?.email;
+  return userEmail;
+}
+function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar, User}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    session().then((e) => {setUser(e)})
+  })
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -38,7 +45,7 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
         <div class="logoutButton">
           <Button size="small" variant="contained" onClick={() => {
                 signOut(router);
-          }}>{user?.email}</Button>
+          }}>Logout {user}</Button>
         </div>
         <div class="pokemonChoice">  
         <TextField
@@ -132,6 +139,8 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
 }
 
 export async function getServerSideProps() {
+  const { data, error } = await supabase.auth.getSession()
+  var userEmail = data?.session?.user?.email;
   var dataKanto;
   {let { data } = await supabase.from('Kanto').select()
   dataKanto = data;}
@@ -165,7 +174,8 @@ export async function getServerSideProps() {
      Unova: dataUnova,
      Kalos: dataKalos,
      Alola: dataAlola,
-     Galar: dataGalar
+     Galar: dataGalar,
+     User: userEmail || null
     },
   }
 }

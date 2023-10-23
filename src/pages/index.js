@@ -25,14 +25,23 @@ async function session() {
   var userEmail = data?.session?.user?.email;
   return userEmail;
 }
+
+async function pushUser(user) {
+  while(user == "NULL") {} // Manual await
+  console.log(user);
+  const { data, error } = await supabase.rpc('createuser', {e: user});
+}
+
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("NULL");
 
   var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
   useEffect(() => {
-    session().then((e) => {setUser(e)})
+    session().then((e) => {setUser(e.substring(0, e.length - 10))})
+    
+    pushUser(user);
   })
   const router = useRouter();
   return (

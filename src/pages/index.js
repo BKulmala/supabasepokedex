@@ -27,9 +27,9 @@ async function session() {
 }
 
 async function pushUser(user) {
-  while(user == "NULL") {} // Manual await
+  //while(user == "NULL") {} // Manual await
   console.log(user);
-  const { data, error } = await supabase.rpc('createuser', {e: user});
+  //const { data, error } = await supabase.rpc('createuser', {e: user});
 }
 
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {

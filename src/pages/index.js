@@ -9,6 +9,7 @@ import FormGroup from "@mui/material/FormGroup"
 import { Checkbox, FormControlLabel } from '@mui/material'
 const inter = Inter({ subsets: ['latin'] })
 const { data: { user } } = await supabase.auth.getUser()
+import { useRouter } from 'next/router';
 
 function changeGIF(pokemon) {
   var img = document.getElementById("test");
@@ -16,10 +17,41 @@ function changeGIF(pokemon) {
 }
 
 function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
+  
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
   console.log(user?.email);
-  return (
+
+  const [login, setLogin] = useState("Please Login to Access Your Own Pokedex!");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    setIsLoggedIn(false);
+    setLogin("Please Login to Access Your Own Pokedex!");
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Logout failed: ', error.message);
+    } else {
+      router.push('/');
+    }
+  };
+
+  const handleLogin = () => {
+       router.push('/login');
+  };
+
+  useEffect(() => {
+
+    if(user) {
+      setIsLoggedIn(true);
+      setLogin(user?.email.split("@")[0]);
+    }
+  }, [user]);
+
+
+    return (
     <>
       <Head>
         <title>Pokedex</title>
@@ -27,8 +59,16 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="https://img.pokemondb.net/sprites/x-y/normal/bulbasaur.png"/>
       </Head>
+
       <main class="mainPage">
-        <div class="pokemonChoice">  
+        <div class="pokemonChoice"> 
+        <div className="welcome-message">
+          <p>Welcome, {login}</p>
+          {isLoggedIn ? (<button className="logout" onClick={handleLogout}>Logout</button> ) 
+            : 
+            ( <button className="login" onClick={handleLogin}>Login</button>)
+          }
+        </div>
         <TextField
           id="outlined-basic"
           variant="filled"

@@ -6,52 +6,64 @@ import React, {useState, useEffect } from 'react'
 import { supabase } from '../api/hello.js'
 import TextField from "@mui/material/TextField"
 import FormGroup from "@mui/material/FormGroup"
-import { Checkbox, FormControlLabel } from '@mui/material'
+import { Checkbox, FormControlLabel, Button } from '@mui/material'
+import { useRouter } from 'next/navigation';
 const inter = Inter({ subsets: ['latin'] })
 const { data: { user } } = await supabase.auth.getUser()
-import { useRouter } from 'next/router';
 
 function changeGIF(pokemon) {
   var img = document.getElementById("test");
   img.src = "https://projectpokemon.org/images/normal-sprite/" + pokemon + ".gif";
 }
 
-function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
-  
+async function login(router) {
+      router.push('/login');
+  };
+
+async function signOut(router, status, setStatus) {
+  const { error } = await supabase.auth.signOut();
+  router.push("/login");
+}
+
+async function session(status, setStatus) {
+  const { data, error } = await supabase.auth.getSession()
+  setStatus(true);
+  var userEmail = data?.session?.user?.email;
+  return userEmail;
+}
+
+async function pushUser(user) {
+  //while(user == "NULL") {} // Manual await
+  console.log(user);
+  //const { data, error } = await supabase.rpc('createuser', {e: user});
+}
+
+function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
-  console.log(user?.email);
+  const [user, setUser] = useState("NULL");
+  const [status, setStatus] = useState(false);
 
-  const [login, setLogin] = useState("Please Login to Access Your Own Pokedex!");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    setIsLoggedIn(false);
-    setLogin("Please Login to Access Your Own Pokedex!");
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Logout failed: ', error.message);
-    } else {
-      router.push('/');
-    }
-  };
-
-  const handleLogin = () => {
-       router.push('/login');
-  };
-
+  var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
+  
   useEffect(() => {
 
-    if(user) {
-      setIsLoggedIn(true);
-      setLogin(user?.email.split("@")[0]);
-    }
-  }, [user]);
+      session(status, setStatus).then((e) => { 
+        if(e != null)  { 
+          setUser(e.substring(0, e.length - 10))
+        } 
+        else {
+          setStatus(false);}
+        }
+      );
+      
+      pushUser(user);
 
+  })
+  const router = useRouter();
 
-    return (
+  return (
+
     <>
       <Head>
         <title>Pokedex</title>
@@ -61,14 +73,31 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
       </Head>
 
       <main class="mainPage">
-        <div class="pokemonChoice"> 
-        <div className="welcome-message">
-          <p>Welcome, {login}</p>
-          {isLoggedIn ? (<button className="logout" onClick={handleLogout}>Logout</button> ) 
+
+         <div class="logoutButton">
+          {status ? 
+            (
+              <div>
+                <p>Welcome {user}</p>
+                <Button size="small" variant="contained" onClick={() => signOut(router, status, setStatus)}>
+                  Logout {user}
+                </Button>
+              </div>
+            )
             : 
-            ( <button className="login" onClick={handleLogin}>Login</button>)
+            (
+              <div>
+                <p>Welcome, Please Login to Access Your Own Pokedex!</p>
+                <Button size="small" variant="contained" onClick={() => login(router)}>
+                  Login
+                </Button>
+              </div>
+            )
           }
-        </div>
+
+          </div>
+
+        <div class="pokemonChoice">  
         <TextField
           id="outlined-basic"
           variant="filled"
@@ -96,6 +125,16 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar }) {
       {Kanto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>
+          <Checkbox {...Kanto} color="default" onChange={e => {
+          if(e.target.checked == true) {
+            caughtPokemon.Kanto[pokemon.name] = pokemon.type;
+            console.log(caughtPokemon);
+          }
+          if(e.target.checked == false) {
+            delete caughtPokemon.Kanto[pokemon.name];
+            console.log(caughtPokemon);
+          }
+        }}/>
           {pokemon.name}
           </li>
       ))}

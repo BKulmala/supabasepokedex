@@ -43,11 +43,12 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
   const [array, setArray] = useState([]);
   const [user, setUser] = useState("NULL");
   const [status, setStatus] = useState(false);
-
+  var friendKanto = [];
+  friendCaught.forEach(element => friendKanto.push(element.kanto));
   var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
-  
+  const intersection = pokemonCaught.filter(energy => friendKanto.includes(energy.kanto));
+  console.log(intersection);
   useEffect(() => {
-
       session(status, setStatus).then((e) => { 
         if(e != null)  { 
           setUser(e.substring(0, e.length - 10))
@@ -113,10 +114,8 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
         <FormGroup>
         <FormControlLabel labelPlacement="end" 
                     control={<Checkbox sx={{left:45}}{..."label"}
-                    onClick={e => {           
-                      let copy = array;
+                    onClick={e => {     
                       if(e.target.checked == true) {
-                        console.log(pokemonCaught);
                         setArray(pokemonCaught);
                       }
                       if(e.target.checked == false) {
@@ -125,9 +124,9 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
                     label={<span style={{ position: 'relative', right:'-40px' }}>Toggle caught pokemon</span>} />
         <FormControlLabel labelPlacement="end" 
                     control={<Checkbox sx={{left:45}}{..."label"}
-                    onClick={e => {           
-                      let copy = array;
+                    onClick={e => {     
                       if(e.target.checked == true) {
+                        setArray(intersection);
                       }
                       if(e.target.checked == false) {
                         setArray([]);
@@ -146,11 +145,9 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
           <Checkbox {...Kanto} color="default" onChange={e => {
           if(e.target.checked == true) {
             caughtPokemon.Kanto[pokemon.name] = pokemon.type;
-            console.log(caughtPokemon);
           }
           if(e.target.checked == false) {
             delete caughtPokemon.Kanto[pokemon.name];
-            console.log(caughtPokemon);
           }
         }}/>
           {pokemon.name}
@@ -217,12 +214,12 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
 }
 
 export async function getServerSideProps() {
-  var friendCaught;
-  {let { data } = await supabase.from('jmmartin1299').select('kanto')
-  friendCaught = data;}
   var dataCaught;
   {let { data } = await supabase.from('caughtservineatwork').select('kanto')
   dataCaught = data;}
+  var friendCaught;
+  {let { data } = await supabase.from('jmmartin1229').select('kanto')
+  friendCaught = data;}
   var dataKanto;
   {let { data } = await supabase.from('Kanto').select()
   dataKanto = data;}

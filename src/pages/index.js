@@ -34,11 +34,11 @@ async function session(status, setStatus) {
 
 async function pushUser(user) {
   //while(user == "NULL") {} // Manual await
-  console.log(user);
+  //console.log(user);
   //const { data, error } = await supabase.rpc('createuser', {e: user});
 }
 
-function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
+function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
   const [user, setUser] = useState("NULL");
@@ -116,12 +116,30 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
                     onClick={e => {           
                       let copy = array;
                       if(e.target.checked == true) {
+                        console.log(pokemonCaught);
+                        setArray(pokemonCaught);
                       }
                       if(e.target.checked == false) {
                         setArray([]);
                     }}}/>}
                     label={<span style={{ position: 'relative', right:'-40px' }}>Toggle caught pokemon</span>} />
+        <FormControlLabel labelPlacement="end" 
+                    control={<Checkbox sx={{left:45}}{..."label"}
+                    onClick={e => {           
+                      let copy = array;
+                      if(e.target.checked == true) {
+                      }
+                      if(e.target.checked == false) {
+                        setArray([]);
+                    }}}/>}
+                    label={<span style={{ position: 'relative', right:'-40px' }}>Compare with friends</span>} />
         </FormGroup>
+        {array.map((country) => (
+        <li class="filler" onClick={() => changeGIF(country.kanto)} key={country.id}>
+        <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + country.kanto + '.png'} alt='Bulbasaur'/>
+        {country.kanto}
+        </li>
+        ))}
       {Kanto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>
@@ -199,6 +217,12 @@ function Home({ Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
 }
 
 export async function getServerSideProps() {
+  var friendCaught;
+  {let { data } = await supabase.from('jmmartin1299').select('kanto')
+  friendCaught = data;}
+  var dataCaught;
+  {let { data } = await supabase.from('caughtservineatwork').select('kanto')
+  dataCaught = data;}
   var dataKanto;
   {let { data } = await supabase.from('Kanto').select()
   dataKanto = data;}
@@ -225,6 +249,8 @@ export async function getServerSideProps() {
   dataGalar = data;}
   return {
     props: {
+     friendCaught: friendCaught,
+     pokemonCaught: dataCaught,
      Johto: dataJohto,
      Kanto: dataKanto,
      Hoenn: dataHoenn,

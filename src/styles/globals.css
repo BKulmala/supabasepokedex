@@ -71,13 +71,14 @@ a {
 }
 
 @keyframes loop {
-0% {
-  transform: translate(0%,0%);
+  0% {
+    transform: translate(0%,0%);
+  }
+  100% {
+    transform: translate(5%,4%);
+  }
 }
-100% {
-  transform: translate(5%,4%);
-}
-}
+
 .displayGIF {
   position: fixed;
   z-index:10;
@@ -85,6 +86,49 @@ a {
   left: 45%;
 }
 
+.welcome {
+  position: relative;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  right: 0px;
+}
+
+.welcome Button {
+  font-size: 15px;
+  position: relative;
+  left: 45%;
+}
+
+.welcome-alt {
+  position: relative;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  right: 40px;
+
+}
+.welcome-alt Button {
+  position: center;
+  font-size: 15px;
+  right: center;
+}
+
+/* Login Page Attributes */
+
+.logoutButton {
+  font-family: 'Press Start 2P', cursive;
+  position: fixed;
+  right: 10px;
+  z-index: 5;
+}
+
+/* Background */
+.loginBackground {
+  height: 100%;
+  widy: 100%;
+  background: #ff0000;
+}
+
+/* The location of the square */
 .login-container {
   display: flex;
   justify-content: center;
@@ -92,66 +136,135 @@ a {
   height: 100vh;
 }
 
+/* The shape of the login square */ 
 .login-square {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
-  height: 300px;
-  background-color: #f0f0f0;
+  width: 650px;
+  height: 400px;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.25);
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 4px solid #000000;
 }
 
+/* Login Square Background*/
+.login-square:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 670px;
+  height: 400px;
+  top: 25px;
+  left: 10px;
+  right: 10px;
+  background-color: #eeeeff;
+  border-radius: 15px;
+  border: 2px solid #000000;
+  font-family: 'Press Start 2P'
+}
+
+/* Header Text */
 .login-header {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  font-family: 'Press Start 2P', cursive;
+  color: #000000;
   margin: 0;
-  padding-bottom: 20px;
 }
 
+/* Username/Password position */ 
 .login-form {
-  width: 100%;
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  right: 0px;
+  z-index: 2;
+  font-family: 'Press Start 2P', cursive;
 }
 
+/* Username/Password style */
 .login-form label,
 .login-form input,
-.login-form a {
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
+.login-form button {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 12px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.login-form input[type="submit"] {
-  margin-top: 20px;
-}
-
-.separator {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid #000;
-  line-height: 0.1em;
-  margin: 10px 0 20px;
-}
-
-.separator span {
-  background: #f0f0f0;
-  padding: 0 10px;
-}
-
-.login {
+/* Login Button */
+.login-form input[type='submit'] {
   cursor: pointer;
-  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
 }
 
+/* Login in with discord text */
+.discord-login {
+  text-align: left;
+  color: #00000;
+  margin-top: 10px;
+}
+
+/* Discord logo */ 
 .login img {
-  vertical-align: middle;
-  margin-right: 5px;
-  width: 20px;
-  height: auto;
+  cursor: pointer;
+  position: fixed;
+  top: 450px;
+  left: 455px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 20px;
 }
 
-.logoutButton {
-  position: fixed;
-  right: 0;
-  z-index: 5;
+/* Styling for button accessories */ 
+.buttons-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.button {
+  display: inline-block;
+  text-align: center;
+}
+
+.button-blue {
+  background-color: #007bff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-top: 10px;
+  border: 4px solid white;
+}
+
+.button-red, .button-yellow, .button-green {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+  border: 2px solid black;
+  margin-bottom: 48px;
+
+}
+
+.button-red {
+  background-color: red;
+}
+
+.button-yellow{
+  background-color: yellow;
+}
+
+.button-green {
+  background-color: green;
 }

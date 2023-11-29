@@ -78,7 +78,7 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
          <div class="logoutButton">
           {status ? 
             (
-              <div>
+              <div className='welcome-alt'>
                 <p>Welcome {user}</p>
                 <Button size="small" variant="contained" onClick={() => signOut(router, status, setStatus)}>
                   Logout {user}
@@ -87,7 +87,7 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
             )
             : 
             (
-              <div>
+              <div className='welcome'>
                 <p>Welcome, Please Login to Access Your Own Pokedex!</p>
                 <Button size="small" variant="contained" onClick={() => login(router)}>
                   Login

@@ -112,7 +112,6 @@ a {
   right: center;
 }
 
-/* Login Page Attributes */
 
 .logoutButton {
   font-family: 'Press Start 2P', cursive;
@@ -120,6 +119,9 @@ a {
   right: 10px;
   z-index: 5;
 }
+
+/* Login Page Attributes */
+
 
 /* Background */
 .loginBackground {
@@ -199,8 +201,12 @@ a {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.signUp {
+  cursor: pointer;
+  margin-left: 10px;
+}
 /* Login Button */
-.login-form input[type='submit'] {
+.login {
   cursor: pointer;
   font-family: 'Press Start 2P', cursive;
 }
@@ -216,7 +222,7 @@ a {
 .login img {
   cursor: pointer;
   position: fixed;
-  top: 450px;
+  top: 475px;
   left: 455px;
   width: 45px;
   height: 45px;

@@ -51,7 +51,7 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
   useEffect(() => {
       session(status, setStatus).then((e) => { 
         if(e != null)  { 
-          setUser(e.substring(0, e.length - 10))
+          setUser(e.substring(0, e.length - 10).replace("@", ''))
         } 
         else {
           setStatus(false);}

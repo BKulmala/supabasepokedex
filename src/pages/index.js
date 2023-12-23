@@ -47,6 +47,7 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
   var friendKanto = [];
   friendCaught.forEach(element => friendKanto.push(element.kanto));
   var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
+  console.log(Kanto);
   const intersection = pokemonCaught.filter(energy => friendKanto.includes(energy.kanto));
   useEffect(() => {
       session(status, setStatus).then((e) => { 
@@ -102,7 +103,6 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
                     control={<Checkbox sx={{left:45}}{..."label"}
                     onClick={e => {     
                       if(e.target.checked == true) {
-                        setArray(intersection);
                       }
                       if(e.target.checked == false) {
                         setArray([]);

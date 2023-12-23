@@ -81,7 +81,9 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
           variant="filled"
           fullWidth
           label={/*user.email.slice(0,-10)*/"string"}
-          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={(e) => //setValue(e.target.value)
+          console.log('pressed key ${e.key}')
+          }
           sx={{ 
             ml:6,
             mt:4

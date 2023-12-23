@@ -17,28 +17,6 @@ function changeGIF(pokemon) {
   img.src = "https://projectpokemon.org/images/normal-sprite/" + pokemon + ".gif";
 }
 
-async function login(router) {
-      router.push('/login');
-  };
-
-async function signOut(router, status, setStatus) {
-  const { error } = await supabase.auth.signOut();
-  router.push("/login");
-}
-
-async function session(status, setStatus) {
-  const { data, error } = await supabase.auth.getSession()
-  setStatus(true);
-  var userEmail = data?.session?.user?.email;
-  return userEmail;
-}
-
-async function pushUser(user) {
-  //while(user == "NULL") {} // Manual await
-  //console.log(user);
-  //const { data, error } = await supabase.rpc('createuser', {e: user});
-}
-
 export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
@@ -191,7 +169,7 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
   );
 }
 
-export async function getServerSideProps() {
+export function getServerSideProps() {
   var dataCaught;
   {let { data } = await supabase.from('caughtservineatwork').select('kanto')
   dataCaught = data;}

@@ -47,7 +47,6 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
   friendCaught.forEach(element => friendKanto.push(element.kanto));
   var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
   const intersection = pokemonCaught.filter(energy => friendKanto.includes(energy.kanto));
-  console.log(intersection);
   useEffect(() => {
       session(status, setStatus).then((e) => { 
         if(e != null)  { 
@@ -139,7 +138,7 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
         {country.kanto}
         </li>
         ))}
-      {Kanto.map((pokemon) => (
+      {Kanto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>
           <Checkbox {...Kanto} color="default" onChange={e => {

@@ -39,7 +39,7 @@ async function pushUser(user) {
   //const { data, error } = await supabase.rpc('createuser', {e: user});
 }
 
-function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
+export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar}) {
   const [value, setValue] = React.useState();
   const [array, setArray] = useState([]);
   const [user, setUser] = useState("NULL");
@@ -235,5 +235,3 @@ export async function getServerSideProps() {
     },
   }
 }
-
-export default Home;

@@ -65,15 +65,6 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
                         setArray([]);
                     }}}/>}
                     label={<span style={{ position: 'relative', right:'-40px' }}>Toggle caught pokemon</span>} />
-        <FormControlLabel labelPlacement="end" 
-                    control={<Checkbox sx={{left:45}}{..."label"}
-                    onClick={e => {     
-                      if(e.target.checked == true) {
-                      }
-                      if(e.target.checked == false) {
-                        setArray([]);
-                    }}}/>}
-                    label={<span style={{ position: 'relative', right:'-40px' }}>Compare with friends</span>} />
         </FormGroup>
         {array.map((country) => (
         <li class="filler" onClick={() => changeGIF(country.kanto)} key={country.id}>

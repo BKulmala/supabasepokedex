@@ -169,7 +169,7 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
   );
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
   var dataCaught;
   {let { data } = await supabase.from('caughtservineatwork').select('kanto')
   dataCaught = data;}

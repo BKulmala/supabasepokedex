@@ -139,7 +139,7 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
         {country.kanto}
         </li>
         ))}
-      {Kanto.filter(pokemon => {if(value == null) {return} else{return pokemon.name.includes(value)}}).map((pokemon) => (
+      {Kanto.map((pokemon) => (
         <li style={{background:"var(--"+pokemon.type +")", }} class="filler" onClick={() => changeGIF(pokemon.name)} key={pokemon.id}>
           <Image width='70'height='70'src={'https://img.pokemondb.net/sprites/x-y/normal/' + pokemon.name + '.png'} alt='pokemon.Pokemon'/>
           <Checkbox {...Kanto} color="default" onChange={e => {

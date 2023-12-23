@@ -27,19 +27,6 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
   var caughtPokemon = { "Kanto":{}, "Johto":{}, "Hoenn":{}, "Sinnoh":{}, "Unova":{}, "Kalos":{}, "Alola":{}, "Galar":{} };
   console.log(Kanto);
   const intersection = pokemonCaught.filter(energy => friendKanto.includes(energy.kanto));
-  useEffect(() => {
-      session(status, setStatus).then((e) => { 
-        if(e != null)  { 
-          setUser(e.substring(0, e.length - 10).replace("@", ''))
-        } 
-        else {
-          setStatus(false);}
-        }
-      );
-      
-      pushUser(user);
-
-  })
   const router = useRouter();
 
   return (
@@ -59,8 +46,7 @@ export default function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn,
           variant="filled"
           fullWidth
           label={/*user.email.slice(0,-10)*/"string"}
-          onKeyDown={(e) => //setValue(e.target.value)
-          console.log('pressed key ${e.key}')
+          onKeyDown={(e) => setValue(e.target.value)
           }
           sx={{ 
             ml:6,

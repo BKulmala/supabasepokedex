@@ -74,30 +74,6 @@ function Home({ friendCaught, pokemonCaught, Kanto, Johto, Hoenn, Sinnoh, Unova,
       </Head>
 
       <main class="mainPage">
-
-         <div class="logoutButton">
-          {status ? 
-            (
-              <div className='welcome-alt'>
-                <p>Welcome {user}</p>
-                <Button size="small" variant="contained" onClick={() => signOut(router, status, setStatus)}>
-                  Logout {user}
-                </Button>
-              </div>
-            )
-            : 
-            (
-              <div className='welcome'>
-                <p>Welcome, Please Login to Access Your Own Pokedex!</p>
-                <Button size="small" variant="contained" onClick={() => login(router)}>
-                  Login
-                </Button>
-              </div>
-            )
-          }
-
-          </div>
-
         <div class="pokemonChoice">  
         <TextField
           id="outlined-basic"

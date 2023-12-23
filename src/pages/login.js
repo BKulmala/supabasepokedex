@@ -20,7 +20,7 @@ function MainPage() {
       email: login,
       password: password,
       options: {
-        emailRedirectTo: '/localhost::3000'
+        emailRedirectTo: 'https://supabasepokedex.vercel.app'
       }
     });
   };

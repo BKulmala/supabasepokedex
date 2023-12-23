@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField"
 import FormGroup from "@mui/material/FormGroup"
 import { Checkbox, FormControlLabel, Button } from '@mui/material'
 import { useRouter } from 'next/navigation';
+export const dynamic = 'force-dynamic';
 const inter = Inter({ subsets: ['latin'] })
 const { data: { user } } = await supabase.auth.getUser()
 
